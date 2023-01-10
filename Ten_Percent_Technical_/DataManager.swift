@@ -15,7 +15,7 @@ open class DataManager: NSObject {
     
     private override init() {}
     
-    func retrieveAppState(with container: NSPersistentContainer) -> NSManagedObject? {
+    func retrieveAppState(with container: NSPersistentContainer) {
         let managedContext = container.viewContext
         
         let topicFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Topic")
@@ -27,17 +27,15 @@ open class DataManager: NSObject {
             let subtopicResult = try managedContext.fetch(subtopicFetchRequest) as! [NSManagedObject]
             let meditationResult = try managedContext.fetch(meditationFetchRequest) as! [NSManagedObject]
             
-            //TODO: get and store the data in the store not just the first
+            // If we have topics, assume we've already fetched the data
             if topicResult.count > 0 {
-                
-                return topicResult[0]
-            } else {
-                return nil
+                store.topics = topicResult.map{Topics.Topic(json: convertItemToDict($0))}
+                store.subtopics = subtopicResult.map{Subtopics.Subtopic(json: convertItemToDict($0))}
+                store.meditations = meditationResult.map{Meditations.Meditation(json: convertItemToDict($0))}
             }
-        } catch let error as NSError {
             
+        } catch let error as NSError {
             print("Retrieving app state failed. \(error)")
-            return nil
         }
     }
     
@@ -90,15 +88,20 @@ open class DataManager: NSObject {
 func convertToJSONArray(moArray: [NSManagedObject]) -> Any {
     var jsonArray: [[String: Any]] = []
     for item in moArray {
-        var dict: [String: Any] = [:]
-        for attribute in item.entity.attributesByName {
-            
-            // Check if value is present
-            if let value = item.value(forKey: attribute.key) {
-                dict[attribute.key] = value
-            }
-        }
+        let dict = convertItemToDict(item)
         jsonArray.append(dict)
     }
     return jsonArray
+}
+
+func convertItemToDict(_ item: NSManagedObject) -> [String: Any] {
+    var dict: [String: Any] = [:]
+    for attribute in item.entity.attributesByName {
+        
+        // Check if value is present
+        if let value = item.value(forKey: attribute.key) {
+            dict[attribute.key] = value
+        }
+    }
+    return dict
 }

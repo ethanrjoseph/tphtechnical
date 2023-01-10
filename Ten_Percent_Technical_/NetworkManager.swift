@@ -92,6 +92,15 @@ struct Topics: Decodable {
         var meditations: [String]
         var featured: Bool
         var color: String
+        
+        init(json: [String: Any]) {
+            uuid = json["uuid"] as! String
+            title = json["title"] as! String
+            position = json["position"] as! Int
+            meditations = json["meditations"] as! [String]
+            featured = json["featured"] as! Bool
+            color = json["color"] as! String
+        }
     }
 }
 
@@ -105,6 +114,14 @@ struct Subtopics: Decodable {
         var title: String
         var position: Int
         var meditations: [String]
+        
+        init(json: [String: Any]) {
+            uuid = json["uuid"] as! String
+            parent_topic_uuid = json["parent_topic_uuid"] as! String
+            title = json["title"] as! String
+            position = json["position"] as! Int
+            meditations = json["meditations"] as! [String]
+        }
     }
 }
 
@@ -118,5 +135,13 @@ struct Meditations: Decodable {
         var teacher_name: String
         var image_url: String
         var play_count: Int?
+        
+        init(json: [String: Any]) {
+            uuid = json["uuid"] as! String
+            title = json["title"] as! String
+            teacher_name = json["teacher_name"] as! String
+            image_url = json["image_url"] as! String
+            play_count = json["play_count"] as? Int
+        }
     }
 }
