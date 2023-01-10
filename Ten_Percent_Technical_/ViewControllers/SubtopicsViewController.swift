@@ -53,7 +53,7 @@ class SubtopicsViewController: UIViewController {
         var subtopicSections = store.subtopics.filter{$0.parent_topic_uuid == self.topic.uuid}.map{
             let meditations = $0.meditations.compactMap{ uuid in
                 return store.meditations.first{$0.uuid == uuid}
-            }
+            }.sorted{$0.play_count ?? 0 > $1.play_count ?? 0}
             return SubtopicSection(title: $0.title, meditations: meditations)
         }
         
@@ -62,7 +62,7 @@ class SubtopicsViewController: UIViewController {
             
             let meditations = self.topic.meditations.compactMap { uuid in
                 return store.meditations.first{$0.uuid == uuid }
-            }
+            }.sorted{$0.play_count ?? 0 > $1.play_count ?? 0}
             
             let section = SubtopicSection(title: "Meditations", meditations: meditations)
             subtopicSections.append(section)
