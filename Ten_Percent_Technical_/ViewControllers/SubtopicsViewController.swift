@@ -12,8 +12,8 @@ class SubtopicsViewController: UIViewController {
 
     weak var coordinator: MainCoordinator?
 
-    lazy var tableView = TopicsTableView()
-    lazy var manager = TopicsTableViewManager(tableView: tableView)
+    lazy var tableView = TableView()
+    lazy var manager = TableViewManager(tableView: tableView)
     
     override func loadView() {
         self.view = self.tableView

@@ -18,6 +18,7 @@
 		52FAAC37296CF808003C60BA /* AppState.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 52FAAC35296CF808003C60BA /* AppState.xcdatamodeld */; };
 		52FAAC3C296D1C84003C60BA /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FAAC3B296D1C84003C60BA /* UIExtensions.swift */; };
 		52FAAC3E296D2F11003C60BA /* SubtopicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FAAC3D296D2F11003C60BA /* SubtopicsViewController.swift */; };
+		52FAAC41296D33DF003C60BA /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FAAC40296D33DF003C60BA /* TableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		52FAAC36296CF808003C60BA /* AppState.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppState.xcdatamodel; sourceTree = "<group>"; };
 		52FAAC3B296D1C84003C60BA /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		52FAAC3D296D2F11003C60BA /* SubtopicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtopicsViewController.swift; sourceTree = "<group>"; };
+		52FAAC40296D33DF003C60BA /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				52FAAC2F296CE536003C60BA /* Coordinator.swift */,
 				52FAAC1D296CE37D003C60BA /* SceneDelegate.swift */,
 				52FAAC39296D1B3C003C60BA /* Managers */,
+				52FAAC3F296D33BC003C60BA /* Shared UI Components */,
 				52FAAC38296D1B16003C60BA /* ViewControllers */,
 				52FAAC3A296D1C67003C60BA /* Extensions */,
 				52FAAC24296CE37E003C60BA /* Assets.xcassets */,
@@ -104,6 +107,14 @@
 				52FAAC3B296D1C84003C60BA /* UIExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		52FAAC3F296D33BC003C60BA /* Shared UI Components */ = {
+			isa = PBXGroup;
+			children = (
+				52FAAC40296D33DF003C60BA /* TableView.swift */,
+			);
+			path = "Shared UI Components";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52FAAC30296CE536003C60BA /* Coordinator.swift in Sources */,
+				52FAAC41296D33DF003C60BA /* TableView.swift in Sources */,
 				52FAAC34296CF5D1003C60BA /* DataManager.swift in Sources */,
 				52FAAC37296CF808003C60BA /* AppState.xcdatamodeld in Sources */,
 				52FAAC3C296D1C84003C60BA /* UIExtensions.swift in Sources */,

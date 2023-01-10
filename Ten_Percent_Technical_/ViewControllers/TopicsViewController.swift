@@ -24,8 +24,8 @@ class TopicsViewController: UIViewController {
     
     unowned var delegate: TopicsViewControllerDelegate
 
-    private lazy var tableView = TopicsTableView()
-    private lazy var manager = TopicsTableViewManager(tableView: tableView)
+    private lazy var tableView = TableView()
+    private lazy var manager = TableViewManager<TopicsCell>(tableView: tableView)
     private var featuredTopics: [Topics.Topic] = []
     
     override func loadView() {
@@ -60,78 +60,7 @@ class TopicsViewController: UIViewController {
     }
 }
 
-class TopicsTableView: UITableView {
-
-    init() {
-        super.init(frame: .zero, style: .plain)
-        self.separatorStyle = .none
-        self.estimatedRowHeight = 80
-        self.allowsSelection = true
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    override var rowHeight: CGFloat {
-        get {
-            return 80
-        }
-        set {
-            guard self.rowHeight != newValue else { return }
-            self.rowHeight = newValue
-        }
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-}
-
-
-class TopicsTableViewManager: NSObject, UITableViewDelegate, UITableViewDataSource {
-
-    private let tableView: TopicsTableView
-    var rows: [Topics.Topic] = []
-    var sections: [Int] = [1]
-    
-    var selectionHandler: ((IndexPath) -> Void)?
-
-    init(tableView: TopicsTableView) {
-        self.tableView = tableView
-
-        self.tableView.register(TopicsCell.self, forCellReuseIdentifier: "TopicsCell")
-        self.tableView.reloadData()
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.rows.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TopicsCell", for: indexPath) as! TopicsCell
-
-        let itemType = self.rows[indexPath.row]
-        
-        cell.configure(for: itemType)
-        cell.selectionStyle = .none
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.tableView.rowHeight
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.selectionHandler?(indexPath)
-    }
-}
-
-class TopicsCell: UITableViewCell {
+class TopicsCell: TableViewCell {
 
     var containerView = UIView()
     var colorStrip = UIView()
@@ -143,7 +72,7 @@ class TopicsCell: UITableViewCell {
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-       super.init(style: style, reuseIdentifier: "cell")
+        super.init(style: style, reuseIdentifier: TopicsCell.description())
         
         self.containerView.layer.borderWidth = 1.0
         self.containerView.layer.borderColor = UIColor.lightGray.cgColor
@@ -156,7 +85,8 @@ class TopicsCell: UITableViewCell {
         self.containerView.addSubview(self.meditationsLabel)
     }
 
-    func configure(for topic: Topics.Topic) {
+    override func configure(for item: Any) {
+        guard let topic = item as? Topics.Topic else { return }
         
         self.colorStrip.backgroundColor = UIColor(hexString: topic.color)
     

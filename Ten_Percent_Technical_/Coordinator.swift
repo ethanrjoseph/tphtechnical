@@ -26,12 +26,11 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        
         let vc = TopicsViewController(delegate: self)
         navigationController.pushViewController(vc, animated: false)
     }
     
-    func pushSubTopics() {
+    private func pushSubTopics() {
         let vc = SubtopicsViewController()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
