@@ -23,9 +23,6 @@ final class NetworkManager {
         store.topics = topics.topics
         store.subtopics = subtopics.subtopics
         store.meditations = mediations.meditations
-        
-        // Store what we retrieved in core data
-        DataManager.shared.saveAppState(store)
     }
 
     private func getTopics() async throws -> Topics {
@@ -123,70 +120,3 @@ struct Meditations: Decodable {
         var play_count: Int?
     }
 }
-
-// MARK: Core data models
-
-public class TopicObject: NSObject {
-    
-    var uuid: String
-    var title: String
-    var position: Int
-    var meditations: [String]
-    var featured: Bool
-    var color: String
-    
-    convenience init(topic: Topics.Topic) {
-        self.init(uuid: topic.uuid, title: topic.title, position: topic.position, meditations: topic.meditations, featured: topic.featured, color: topic.color)
-    }
-    
-    init(uuid: String, title: String, position: Int, meditations: [String], featured: Bool, color: String) {
-        self.uuid = uuid
-        self.title = title
-        self.position = position
-        self.meditations = meditations
-        self.featured = featured
-        self.color = color
-    }
-}
-
-public class SubtopicObject: NSObject {
-    var uuid: String
-    var parent_topic_uuid: String
-    var title: String
-    var position: Int
-    var meditations: [String]
-    
-    convenience init(subtopic: Subtopics.Subtopic) {
-        self.init(uuid: subtopic.uuid, parent_topic_uuid: subtopic.parent_topic_uuid, title: subtopic.title, position: subtopic.position, meditations: subtopic.meditations)
-    }
-    
-    init(uuid: String, parent_topic_uuid: String, title: String, position: Int, meditations: [String]) {
-        self.uuid = uuid
-        self.parent_topic_uuid = parent_topic_uuid
-        self.title = title
-        self.position = position
-        self.meditations = meditations
-    }
-}
-
-public class MeditationObject: NSObject {
-    var uuid: String
-    var title: String
-    var teacher_name: String
-    var image_url: String
-    var play_count: Int?
-    
-    convenience init(meditation: Meditations.Meditation) {
-        self.init(uuid: meditation.uuid, title: meditation.title, teacher_name: meditation.teacher_name, image_url: meditation.image_url, play_count: meditation.play_count)
-    }
-    
-    init(uuid: String, title: String, teacher_name: String, image_url: String, play_count: Int? = nil) {
-        self.uuid = uuid
-        self.title = title
-        self.teacher_name = teacher_name
-        self.image_url = image_url
-        self.play_count = play_count
-    }
-}
-
-

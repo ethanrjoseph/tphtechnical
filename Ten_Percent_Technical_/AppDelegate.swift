@@ -67,11 +67,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Task {
             do {
                 try await NetworkManager.shared.fetchAllData()
-            } catch {
                 
-                if let appState = DataManager.shared.retrieveAppState() {
+                // Store what we retrieved in core data
+                DataManager.shared.saveAppState(store, container: persistentContainer)
+            } catch {
+                if let appState = DataManager.shared.retrieveAppState(with: persistentContainer) {
+                    
                     // Use the data we retrieved
                     print(appState)
+                    
                 } else {
                     // All fetches failed
                     print("Fetch user data failed")

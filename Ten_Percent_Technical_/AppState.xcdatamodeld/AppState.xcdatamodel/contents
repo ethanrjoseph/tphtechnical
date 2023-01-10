@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="21G72" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="AppState" representedClassName="AppState" syncable="YES" codeGenerationType="class">
-        <attribute name="meditations" optional="YES" attributeType="Transformable" customClassName="[MeditationObject]"/>
-        <attribute name="subtopics" optional="YES" attributeType="Transformable" customClassName="[SubtopicObject]"/>
-        <attribute name="topics" optional="YES" attributeType="Transformable" customClassName="[TopicObject]"/>
+    <entity name="Meditation" representedClassName="Meditation" syncable="YES" codeGenerationType="class">
+        <attribute name="image_url" optional="YES" attributeType="String"/>
+        <attribute name="play_count" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="teacher_name" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="uuid" optional="YES" attributeType="String" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[MeditationObject]"/>
+    </entity>
+    <entity name="Subtopic" representedClassName="Subtopic" syncable="YES" codeGenerationType="class">
+        <attribute name="meditations" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
+        <attribute name="parent_topic_uuid" optional="YES" attributeType="String"/>
+        <attribute name="position" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="uuid" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Topic" representedClassName="Topic" syncable="YES" codeGenerationType="class">
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="featured" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="meditations" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
+        <attribute name="position" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="uuid" optional="YES" attributeType="String"/>
     </entity>
 </model>

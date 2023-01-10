@@ -64,13 +64,13 @@
 			children = (
 				52FAAC1B296CE37D003C60BA /* AppDelegate.swift */,
 				52FAAC2F296CE536003C60BA /* Coordinator.swift */,
+				52FAAC33296CF5D1003C60BA /* DataManager.swift */,
 				52FAAC31296CED71003C60BA /* NetworkManager.swift */,
 				52FAAC1D296CE37D003C60BA /* SceneDelegate.swift */,
 				52FAAC1F296CE37D003C60BA /* ViewController.swift */,
 				52FAAC24296CE37E003C60BA /* Assets.xcassets */,
 				52FAAC26296CE37E003C60BA /* LaunchScreen.storyboard */,
 				52FAAC29296CE37E003C60BA /* Info.plist */,
-				52FAAC33296CF5D1003C60BA /* DataManager.swift */,
 				52FAAC35296CF808003C60BA /* AppState.xcdatamodeld */,
 			);
 			path = Ten_Percent_Technical_;
