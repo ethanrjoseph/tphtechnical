@@ -12,6 +12,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        Task {
+            do {
+                let topics = try await NetworkManager.shared.getTopics()
+                print(topics)
+            } catch {
+                print("FETCH RAW PROMPTS FAILED", error)
+            }
+        }
+        
         return true
     }
 
