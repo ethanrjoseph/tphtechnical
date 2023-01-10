@@ -62,7 +62,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Check to see if we already have the data stored
         if let appState = DataManager.shared.retrieveAppState(with: persistentContainer) {
-            
+            store.topics = appState.0
+            store.subtopics = appState.1
+            store.meditations = appState.2
         } else {
             
             // Attempt to fetch over network

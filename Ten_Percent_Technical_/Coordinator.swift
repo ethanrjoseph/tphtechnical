@@ -22,11 +22,12 @@ class MainCoordinator: Coordinator {
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        self.navigationController.navigationBar.prefersLargeTitles = true
     }
 
     func start() {
         
-        let vc = ViewController()
+        let vc = TopicsViewController()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: false)
     }
