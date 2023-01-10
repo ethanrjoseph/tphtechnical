@@ -60,21 +60,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        // TODO: first see if we have anything stored locally -
-        
-        // then attempt to fetch from the network
-        
-        Task {
-            do {
-                try await NetworkManager.shared.fetchAllData()
-                
-                // Store what we retrieved in core data
-                DataManager.shared.saveAppState(store, container: persistentContainer)
-            } catch {
-                DataManager.shared.retrieveAppState(with: persistentContainer)
-                
-                // All fetches failed
-                print("Network fetch failed")
+        // Check to see if we already have the data stored
+        if let appState = DataManager.shared.retrieveAppState(with: persistentContainer) {
+            
+        } else {
+            
+            // Attempt to fetch over network
+            Task {
+                do {
+                    try await NetworkManager.shared.fetchAllData()
+                    
+                    // Store what we retrieved in core data
+                    DataManager.shared.saveAppState(store, container: persistentContainer)
+                } catch {
+                    print("Network fetch failed")
+                }
             }
         }
         

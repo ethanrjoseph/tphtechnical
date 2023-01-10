@@ -15,34 +15,28 @@ open class DataManager: NSObject {
     
     private override init() {}
     
-    func retrieveAppState(with container: NSPersistentContainer) {
+    func retrieveAppState(with container: NSPersistentContainer) -> ([Topics.Topic], [Subtopics.Subtopic], [Meditations.Meditation])? {
         let managedContext = container.viewContext
         
         let topicFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Topic")
         let subtopicFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Subtopic")
         let meditationFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Meditation")
         
-        do {
-            let topicResult = try managedContext.fetch(topicFetchRequest) as! [NSManagedObject]
-            let subtopicResult = try managedContext.fetch(subtopicFetchRequest) as! [NSManagedObject]
-            let meditationResult = try managedContext.fetch(meditationFetchRequest) as! [NSManagedObject]
-            
-            // If we have topics, assume we've already fetched the data
-            if topicResult.count > 0 {
-                store.topics = topicResult.map{Topics.Topic(json: convertItemToDict($0))}
-                store.subtopics = subtopicResult.map{Subtopics.Subtopic(json: convertItemToDict($0))}
-                store.meditations = meditationResult.map{Meditations.Meditation(json: convertItemToDict($0))}
-            }
-            
-        } catch let error as NSError {
-            print("Retrieving app state failed. \(error)")
-        }
+        
+        guard let topicResult = try? managedContext.fetch(topicFetchRequest) as? [NSManagedObject],
+              let subtopicResult = try? managedContext.fetch(subtopicFetchRequest) as? [NSManagedObject],
+              let meditationResult = try? managedContext.fetch(meditationFetchRequest) as? [NSManagedObject] else { return nil }
+        
+        // If we have topics, assume we've already fetched the data
+        guard topicResult.count > 0  else { return nil }
+        return (topicResult.map{Topics.Topic(json: convertItemToDict($0))},
+                subtopicResult.map{Subtopics.Subtopic(json: convertItemToDict($0))},
+                meditationResult.map{Meditations.Meditation(json: convertItemToDict($0))})
+        
     }
     
     func saveAppState(_ state: AppStateStore, container: NSPersistentContainer) {
         let managedContext = container.viewContext
-        
-        let appState = retrieveAppState(with: container)
         
         for topic in store.topics {
             let topicObject = NSEntityDescription.insertNewObject(forEntityName: "Topic", into: managedContext)
