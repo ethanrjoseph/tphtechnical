@@ -8,12 +8,14 @@
 import Foundation
 import UIKit
 
-final class ReusableCellImageAdapter {
+final class CellImageAdapter {
+    
     var latestTaskId: String = ""
     var latestTask: URLSessionDataTask?
     
     private static let sessionConfiguration: URLSessionConfiguration = {
         let configuration = URLSessionConfiguration.default
+        
         // For each task, ignore the session cache, and load image from server
         configuration.requestCachePolicy = .reloadIgnoringCacheData
         // For each task, load image from cache, otherwise load from server
@@ -36,6 +38,7 @@ final class ReusableCellImageAdapter {
     /// It takes the responsability to unwrap uiimage.
     func configure(from imgPath: String, completionHandler: @escaping ((UIImage?) -> ()) ) {
         guard let url = URL(string: imgPath) else { return }
+        
         // Keep an history of the request.
         latestTaskId = UUID().uuidString
         let checkTaskId = latestTaskId
@@ -75,6 +78,7 @@ final class ReusableCellImageAdapter {
                 }
             }
         }
+        
         latestTask?.resume()
     }
 }

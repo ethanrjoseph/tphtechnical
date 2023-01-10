@@ -150,7 +150,7 @@ class SubtopicsTableViewManager: NSObject, UITableViewDelegate, UITableViewDataS
     var sections: [SubtopicSection] = []
     var selectionHandler: ((IndexPath) -> Void)?
     
-    private var adapterList = [UITableViewCell: ReusableCellImageAdapter]()
+    private var adapterList = [UITableViewCell: CellImageAdapter]()
 
     init(tableView: TableView) {
         self.tableView = tableView
@@ -202,12 +202,11 @@ class SubtopicsTableViewManager: NSObject, UITableViewDelegate, UITableViewDataS
         self.selectionHandler?(indexPath)
     }
     
-    private func getReusableAdapter(forReusableCell cell: UITableViewCell) -> ReusableCellImageAdapter {
+    private func getReusableAdapter(forReusableCell cell: UITableViewCell) -> CellImageAdapter {
         if let adapter = adapterList[cell]{
             return adapter
-        }
-        else{
-            let adapter = ReusableCellImageAdapter()
+        } else{
+            let adapter = CellImageAdapter()
             adapterList[cell] = adapter
             return adapter
         }
