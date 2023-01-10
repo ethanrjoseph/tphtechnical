@@ -14,6 +14,8 @@
 		52FAAC28296CE37E003C60BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52FAAC26296CE37E003C60BA /* LaunchScreen.storyboard */; };
 		52FAAC30296CE536003C60BA /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FAAC2F296CE536003C60BA /* Coordinator.swift */; };
 		52FAAC32296CED71003C60BA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FAAC31296CED71003C60BA /* NetworkManager.swift */; };
+		52FAAC34296CF5D1003C60BA /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FAAC33296CF5D1003C60BA /* DataManager.swift */; };
+		52FAAC37296CF808003C60BA /* AppState.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 52FAAC35296CF808003C60BA /* AppState.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		52FAAC29296CE37E003C60BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52FAAC2F296CE536003C60BA /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		52FAAC31296CED71003C60BA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		52FAAC33296CF5D1003C60BA /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		52FAAC36296CF808003C60BA /* AppState.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppState.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,8 @@
 				52FAAC24296CE37E003C60BA /* Assets.xcassets */,
 				52FAAC26296CE37E003C60BA /* LaunchScreen.storyboard */,
 				52FAAC29296CE37E003C60BA /* Info.plist */,
+				52FAAC33296CF5D1003C60BA /* DataManager.swift */,
+				52FAAC35296CF808003C60BA /* AppState.xcdatamodeld */,
 			);
 			path = Ten_Percent_Technical_;
 			sourceTree = "<group>";
@@ -141,6 +147,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				52FAAC30296CE536003C60BA /* Coordinator.swift in Sources */,
+				52FAAC34296CF5D1003C60BA /* DataManager.swift in Sources */,
+				52FAAC37296CF808003C60BA /* AppState.xcdatamodeld in Sources */,
 				52FAAC20296CE37D003C60BA /* ViewController.swift in Sources */,
 				52FAAC32296CED71003C60BA /* NetworkManager.swift in Sources */,
 				52FAAC1C296CE37D003C60BA /* AppDelegate.swift in Sources */,
@@ -350,6 +358,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		52FAAC35296CF808003C60BA /* AppState.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				52FAAC36296CF808003C60BA /* AppState.xcdatamodel */,
+			);
+			currentVersion = 52FAAC36296CF808003C60BA /* AppState.xcdatamodel */;
+			path = AppState.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 52FAAC10296CE37D003C60BA /* Project object */;
 }

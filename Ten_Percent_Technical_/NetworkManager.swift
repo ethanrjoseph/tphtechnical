@@ -13,10 +13,13 @@ final class NetworkManager {
     
     func fetchAllData() async throws {
         
-        // TODO: store them all
-        try await getTopics()
-        try await getSubtopics()
-        try await getMeditations()
+        let topics = try await getTopics()
+        let subtopics = try await getSubtopics()
+        let mediations = try await getMeditations()
+        
+//        AppState.shared.topics = topics
+//        AppState.shared.subtopics = subtopics
+//        AppState.shared.meditations = mediations
     }
 
     private func getTopics() async throws -> Topics {
@@ -64,6 +67,68 @@ struct Endpoints {
 }
 
 // MARK: Models
+
+//class AppState: NSObject {
+//
+//    private override init() {}
+//
+//    static var shared = AppState()
+//
+//    var topics: [TopicObject]?
+//    var subtopics: [SubtopicObject]?
+//    var meditations: [MeditationObject]?
+//}
+
+public class TopicObject: NSObject {
+    
+    var uuid: String
+    var title: String
+    var position: Int
+    var meditations: [String]
+    var featured: Bool
+    var color: String
+    
+    init(uuid: String, title: String, position: Int, meditations: [String], featured: Bool, color: String) {
+        self.uuid = uuid
+        self.title = title
+        self.position = position
+        self.meditations = meditations
+        self.featured = featured
+        self.color = color
+    }
+}
+
+public class SubtopicObject: NSObject {
+    var uuid: String
+    var parent_topic_uuid: String
+    var title: String
+    var position: Int
+    var meditations: [String]
+    
+    init(uuid: String, parent_topic_uuid: String, title: String, position: Int, meditations: [String]) {
+        self.uuid = uuid
+        self.parent_topic_uuid = parent_topic_uuid
+        self.title = title
+        self.position = position
+        self.meditations = meditations
+    }
+}
+
+public class MeditationObject: NSObject {
+    var uuid: String
+    var title: String
+    var teacher_name: String
+    var image_url: String
+    var play_count: Int?
+    
+    init(uuid: String, title: String, teacher_name: String, image_url: String, play_count: Int? = nil) {
+        self.uuid = uuid
+        self.title = title
+        self.teacher_name = teacher_name
+        self.image_url = image_url
+        self.play_count = play_count
+    }
+}
 
 struct Topics: Decodable {
     var topics: [Topic]
