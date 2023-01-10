@@ -135,6 +135,10 @@ public class TopicObject: NSObject {
     var featured: Bool
     var color: String
     
+    convenience init(topic: Topics.Topic) {
+        self.init(uuid: topic.uuid, title: topic.title, position: topic.position, meditations: topic.meditations, featured: topic.featured, color: topic.color)
+    }
+    
     init(uuid: String, title: String, position: Int, meditations: [String], featured: Bool, color: String) {
         self.uuid = uuid
         self.title = title
@@ -152,6 +156,10 @@ public class SubtopicObject: NSObject {
     var position: Int
     var meditations: [String]
     
+    convenience init(subtopic: Subtopics.Subtopic) {
+        self.init(uuid: subtopic.uuid, parent_topic_uuid: subtopic.parent_topic_uuid, title: subtopic.title, position: subtopic.position, meditations: subtopic.meditations)
+    }
+    
     init(uuid: String, parent_topic_uuid: String, title: String, position: Int, meditations: [String]) {
         self.uuid = uuid
         self.parent_topic_uuid = parent_topic_uuid
@@ -167,6 +175,10 @@ public class MeditationObject: NSObject {
     var teacher_name: String
     var image_url: String
     var play_count: Int?
+    
+    convenience init(meditation: Meditations.Meditation) {
+        self.init(uuid: meditation.uuid, title: meditation.title, teacher_name: meditation.teacher_name, image_url: meditation.image_url, play_count: meditation.play_count)
+    }
     
     init(uuid: String, title: String, teacher_name: String, image_url: String, play_count: Int? = nil) {
         self.uuid = uuid

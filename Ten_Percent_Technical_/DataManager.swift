@@ -48,10 +48,17 @@ open class DataManager: NSObject {
         let appState = retrieveAppState() ??
         NSEntityDescription.insertNewObject(forEntityName: "AppState", into: managedContext)
         
-        //TODO: set the keys
+        // Convert AppStateStore to Core Data Models
+        let topicObjectsArray = store.topics.map{TopicObject(topic: $0)}
+        let subtopicObjectArray = store.subtopics.map{SubtopicObject(subtopic: $0)}
+        let mediationsObjectArray = store.meditations.map{MeditationObject(meditation: $0)}
+        
+        // Set values
+        appState.setValue(topicObjectsArray, forKey: "topics")
+        appState.setValue(subtopicObjectArray, forKey: "subtopics")
+        appState.setValue(mediationsObjectArray, forKey: "meditations")
         
         // Attempt to save
-        
         do {
             print("Saving data")
             try managedContext.save()
