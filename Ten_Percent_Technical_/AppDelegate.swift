@@ -14,10 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Task {
             do {
-                let topics = try await NetworkManager.shared.getTopics()
-                print(topics)
+                try await NetworkManager.shared.fetchAllData()
             } catch {
-                print("FETCH RAW PROMPTS FAILED", error)
+                //TODO: handle an  error
+                print("Fetch user data failed")
             }
         }
         
