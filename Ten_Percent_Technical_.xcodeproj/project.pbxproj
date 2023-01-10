@@ -17,6 +17,7 @@
 		52FAAC34296CF5D1003C60BA /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FAAC33296CF5D1003C60BA /* DataManager.swift */; };
 		52FAAC37296CF808003C60BA /* AppState.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 52FAAC35296CF808003C60BA /* AppState.xcdatamodeld */; };
 		52FAAC3C296D1C84003C60BA /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FAAC3B296D1C84003C60BA /* UIExtensions.swift */; };
+		52FAAC3E296D2F11003C60BA /* SubtopicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FAAC3D296D2F11003C60BA /* SubtopicsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		52FAAC33296CF5D1003C60BA /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		52FAAC36296CF808003C60BA /* AppState.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppState.xcdatamodel; sourceTree = "<group>"; };
 		52FAAC3B296D1C84003C60BA /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
+		52FAAC3D296D2F11003C60BA /* SubtopicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtopicsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				52FAAC1F296CE37D003C60BA /* TopicsViewController.swift */,
+				52FAAC3D296D2F11003C60BA /* SubtopicsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 				52FAAC32296CED71003C60BA /* NetworkManager.swift in Sources */,
 				52FAAC1C296CE37D003C60BA /* AppDelegate.swift in Sources */,
 				52FAAC1E296CE37D003C60BA /* SceneDelegate.swift in Sources */,
+				52FAAC3E296D2F11003C60BA /* SubtopicsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

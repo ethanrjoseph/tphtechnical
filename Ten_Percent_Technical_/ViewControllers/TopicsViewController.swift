@@ -7,12 +7,26 @@
 
 import UIKit
 
+protocol TopicsViewControllerDelegate: AnyObject {
+    func topicsViewController(didSelect: Topics.Topic, _ controller: TopicsViewController)
+}
+
 class TopicsViewController: UIViewController {
+    
+    init(delegate: TopicsViewControllerDelegate) {
+        self.delegate = delegate
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    unowned var delegate: TopicsViewControllerDelegate
 
-    weak var coordinator: MainCoordinator?
-
-    lazy var tableView = TopicsTableView()
-    lazy var manager = TopicsTableViewManager(tableView: tableView)
+    private lazy var tableView = TopicsTableView()
+    private lazy var manager = TopicsTableViewManager(tableView: tableView)
+    private var featuredTopics: [Topics.Topic] = []
     
     override func loadView() {
         self.view = self.tableView
@@ -25,6 +39,11 @@ class TopicsViewController: UIViewController {
         
         self.tableView.delegate = self.manager
         self.tableView.dataSource = self.manager
+        self.manager.selectionHandler = { [unowned self] indexPath  in
+            // get the corresponding topic
+            let topic = featuredTopics[indexPath.row]
+            self.delegate.topicsViewController(didSelect: topic, self)
+        }
         
         self.title = "Topics"
     }
@@ -35,7 +54,9 @@ class TopicsViewController: UIViewController {
     }
     
     private func updateTableView() {
-        self.manager.rows = store.topics
+        self.featuredTopics = store.topics.filter{ $0.featured }
+        self.featuredTopics.sort{ $0.position < $1.position }
+        self.manager.rows = featuredTopics
     }
 }
 
@@ -73,6 +94,8 @@ class TopicsTableViewManager: NSObject, UITableViewDelegate, UITableViewDataSour
     private let tableView: TopicsTableView
     var rows: [Topics.Topic] = []
     var sections: [Int] = [1]
+    
+    var selectionHandler: ((IndexPath) -> Void)?
 
     init(tableView: TopicsTableView) {
         self.tableView = tableView
@@ -102,6 +125,10 @@ class TopicsTableViewManager: NSObject, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.tableView.rowHeight
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectionHandler?(indexPath)
+    }
 }
 
 class TopicsCell: UITableViewCell {
@@ -122,8 +149,6 @@ class TopicsCell: UITableViewCell {
         self.containerView.layer.borderColor = UIColor.lightGray.cgColor
         self.containerView.layer.cornerRadius = 3.0
         
-        
-        
         self.addSubview(self.containerView)
         
         self.containerView.addSubview(self.colorStrip)
@@ -138,7 +163,12 @@ class TopicsCell: UITableViewCell {
         self.titleLabel.text = topic.title
         self.titleLabel.textColor = .black
         
-        self.meditationsLabel.text = "\(topic.meditations.count) meditations"
+        // Get the subtopic meditations
+        let subtopics = store.subtopics.filter{$0.parent_topic_uuid == topic.uuid}
+        let subtopicMeditations = subtopics.map{$0.meditations.count}.reduce(0, +)
+        let totalMeditations = topic.meditations.count + subtopicMeditations
+        
+        self.meditationsLabel.text = "\(totalMeditations) meditations"
         self.meditationsLabel.textColor = .gray
     }
 

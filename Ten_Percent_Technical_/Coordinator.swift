@@ -27,9 +27,20 @@ class MainCoordinator: Coordinator {
 
     func start() {
         
-        let vc = TopicsViewController()
-        vc.coordinator = self
+        let vc = TopicsViewController(delegate: self)
         navigationController.pushViewController(vc, animated: false)
+    }
+    
+    func pushSubTopics() {
+        let vc = SubtopicsViewController()
+        vc.coordinator = self
+        navigationController.pushViewController(vc, animated: true)
+    }
+}
+
+extension MainCoordinator: TopicsViewControllerDelegate {
+    func topicsViewController(didSelect: Topics.Topic, _ controller: TopicsViewController) {
+        self.pushSubTopics()
     }
 }
 
