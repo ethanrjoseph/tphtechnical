@@ -30,8 +30,8 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: false)
     }
     
-    private func pushSubTopics() {
-        let vc = SubtopicsViewController()
+    private func pushSubTopics(for topic: Topics.Topic) {
+        let vc = SubtopicsViewController(topic: topic)
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
     }
@@ -39,7 +39,7 @@ class MainCoordinator: Coordinator {
 
 extension MainCoordinator: TopicsViewControllerDelegate {
     func topicsViewController(didSelect: Topics.Topic, _ controller: TopicsViewController) {
-        self.pushSubTopics()
+        self.pushSubTopics(for: didSelect)
     }
 }
 

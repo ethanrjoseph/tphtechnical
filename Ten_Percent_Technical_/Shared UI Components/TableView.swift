@@ -40,17 +40,17 @@ class TableViewCell: UITableViewCell {
     func configure(for item: Any) {}
 }
 
+//TODO: Ideally i would make this generic to work with any type of section / row data model, but i dont have time right now :( 
 class TableViewManager<T: TableViewCell>: NSObject, UITableViewDelegate, UITableViewDataSource {
 
     private let tableView: TableView
-    var rows: [Any] = []
-    var sections: [Any] = [1]
+    //var rows: [Any] = []
+    var sections: [[Any]] = []
     
     var selectionHandler: ((IndexPath) -> Void)?
 
     init(tableView: TableView) {
         self.tableView = tableView
-
         self.tableView.register(T.self, forCellReuseIdentifier: T.description())
         self.tableView.reloadData()
     }
@@ -60,16 +60,14 @@ class TableViewManager<T: TableViewCell>: NSObject, UITableViewDelegate, UITable
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.rows.count
+        let rowsForSection = self.sections[section]
+        return rowsForSection.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: T.description(), for: indexPath) as! T
-
-        //TODO: remove this
-        let itemType = self.rows[indexPath.row]
-        
-        cell.configure(for: itemType)
+        let item = self.sections[indexPath.section][indexPath.row]
+        cell.configure(for: item)
         cell.selectionStyle = .none
         return cell
     }

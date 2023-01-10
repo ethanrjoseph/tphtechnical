@@ -56,7 +56,7 @@ class TopicsViewController: UIViewController {
     private func updateTableView() {
         self.featuredTopics = store.topics.filter{ $0.featured }
         self.featuredTopics.sort{ $0.position < $1.position }
-        self.manager.rows = featuredTopics
+        self.manager.sections = [featuredTopics]
     }
 }
 

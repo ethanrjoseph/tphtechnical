@@ -19,6 +19,7 @@
 		52FAAC3C296D1C84003C60BA /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FAAC3B296D1C84003C60BA /* UIExtensions.swift */; };
 		52FAAC3E296D2F11003C60BA /* SubtopicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FAAC3D296D2F11003C60BA /* SubtopicsViewController.swift */; };
 		52FAAC41296D33DF003C60BA /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FAAC40296D33DF003C60BA /* TableView.swift */; };
+		52FAAC43296D42BA003C60BA /* ImageAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FAAC42296D42BA003C60BA /* ImageAdapter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		52FAAC3B296D1C84003C60BA /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		52FAAC3D296D2F11003C60BA /* SubtopicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtopicsViewController.swift; sourceTree = "<group>"; };
 		52FAAC40296D33DF003C60BA /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
+		52FAAC42296D42BA003C60BA /* ImageAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAdapter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 				52FAAC26296CE37E003C60BA /* LaunchScreen.storyboard */,
 				52FAAC29296CE37E003C60BA /* Info.plist */,
 				52FAAC35296CF808003C60BA /* AppState.xcdatamodeld */,
+				52FAAC42296D42BA003C60BA /* ImageAdapter.swift */,
 			);
 			path = Ten_Percent_Technical_;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				52FAAC41296D33DF003C60BA /* TableView.swift in Sources */,
 				52FAAC34296CF5D1003C60BA /* DataManager.swift in Sources */,
 				52FAAC37296CF808003C60BA /* AppState.xcdatamodeld in Sources */,
+				52FAAC43296D42BA003C60BA /* ImageAdapter.swift in Sources */,
 				52FAAC3C296D1C84003C60BA /* UIExtensions.swift in Sources */,
 				52FAAC20296CE37D003C60BA /* TopicsViewController.swift in Sources */,
 				52FAAC32296CED71003C60BA /* NetworkManager.swift in Sources */,
