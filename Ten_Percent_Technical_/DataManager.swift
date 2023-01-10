@@ -42,7 +42,7 @@ open class DataManager: NSObject {
         }
     }
     
-    func saveAppState() {
+    func saveAppState(_ state: AppStateStore) {
         guard let managedContext = getContext() else { return }
         
         let appState = retrieveAppState() ??

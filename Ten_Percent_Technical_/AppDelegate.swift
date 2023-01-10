@@ -8,6 +8,10 @@
 import UIKit
 import CoreData
 
+var store: AppStateStore {
+    return AppStateStore.shared
+}
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -64,8 +68,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             do {
                 try await NetworkManager.shared.fetchAllData()
             } catch {
-                //TODO: handle an  error
-                print("Fetch user data failed")
+                
+                if let appState = DataManager.shared.retrieveAppState() {
+                    // Use the data we retrieved
+                    print(appState)
+                } else {
+                    // All fetches failed
+                    print("Fetch user data failed")
+                }
             }
         }
         

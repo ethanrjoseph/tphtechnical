@@ -11,15 +11,21 @@ final class NetworkManager {
     
     static let shared = NetworkManager()
     
+    /// Attempts to fetch all data over the network
     func fetchAllData() async throws {
         
         let topics = try await getTopics()
         let subtopics = try await getSubtopics()
         let mediations = try await getMeditations()
         
-//        AppState.shared.topics = topics
-//        AppState.shared.subtopics = subtopics
-//        AppState.shared.meditations = mediations
+        
+        // Add data to the shared store
+        store.topics = topics.topics
+        store.subtopics = subtopics.subtopics
+        store.meditations = mediations.meditations
+        
+        // Store what we retrieved in core data
+        DataManager.shared.saveAppState(store)
     }
 
     private func getTopics() async throws -> Topics {
@@ -68,16 +74,57 @@ struct Endpoints {
 
 // MARK: Models
 
-//class AppState: NSObject {
-//
-//    private override init() {}
-//
-//    static var shared = AppState()
-//
-//    var topics: [TopicObject]?
-//    var subtopics: [SubtopicObject]?
-//    var meditations: [MeditationObject]?
-//}
+class AppStateStore {
+    
+    private init() {}
+    
+    static var shared = AppStateStore()
+    
+    var topics: [Topics.Topic] = []
+    var subtopics: [Subtopics.Subtopic] = []
+    var meditations: [Meditations.Meditation] = []
+}
+
+struct Topics: Decodable {
+    var topics: [Topic]
+    
+    struct Topic: Decodable {
+        var uuid: String
+        var title: String
+        var position: Int
+        var meditations: [String]
+        var featured: Bool
+        var color: String
+    }
+}
+
+struct Subtopics: Decodable {
+    
+    var subtopics: [Subtopic]
+    
+    struct Subtopic: Decodable  {
+        var uuid: String
+        var parent_topic_uuid: String
+        var title: String
+        var position: Int
+        var meditations: [String]
+    }
+}
+
+struct Meditations: Decodable {
+    
+    var meditations: [Meditation]
+    
+    struct Meditation: Decodable {
+        var uuid: String
+        var title: String
+        var teacher_name: String
+        var image_url: String
+        var play_count: Int?
+    }
+}
+
+// MARK: Core data models
 
 public class TopicObject: NSObject {
     
@@ -130,42 +177,4 @@ public class MeditationObject: NSObject {
     }
 }
 
-struct Topics: Decodable {
-    var topics: [Topic]
-    
-    struct Topic: Decodable {
-        var uuid: String
-        var title: String
-        var position: Int
-        var meditations: [String]
-        var featured: Bool
-        var color: String
-    }
-}
-
-struct Subtopics: Decodable {
-    
-    var subtopics: [Subtopic]
-    
-    struct Subtopic: Decodable  {
-        var uuid: String
-        var parent_topic_uuid: String
-        var title: String
-        var position: Int
-        var meditations: [String]
-    }
-}
-
-struct Meditations: Decodable {
-    
-    var meditations: [Meditation]
-    
-    struct Meditation: Decodable {
-        var uuid: String
-        var title: String
-        var teacher_name: String
-        var image_url: String
-        var play_count: Int?
-    }
-}
 
